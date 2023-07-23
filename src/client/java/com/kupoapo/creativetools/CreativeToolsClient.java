@@ -3,20 +3,18 @@ package com.kupoapo.creativetools;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
-import net.minecraft.client.gui.Drawable;
-import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.option.KeyBinding;
-import net.minecraft.client.render.BackgroundRenderer;
 import net.minecraft.client.util.InputUtil;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.text.Text;
 import org.lwjgl.glfw.GLFW;
 
 import java.io.File;
 
-public class ExampleModClient implements ClientModInitializer {
+public class CreativeToolsClient implements ClientModInitializer {
 
 	private static KeyBinding imageKeyBinding;
+
+	public static boolean isRunning = false;
+	public static int delay = 10;
 
 	@Override
 	public void onInitializeClient() {

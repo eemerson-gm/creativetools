@@ -19,7 +19,7 @@
 			"com.kupoapo.creativetools.ExampleMod"
 		],
 		"client": [
-			"com.kupoapo.creativetools.ExampleModClient"
+			"com.kupoapo.creativetools.CreativeToolsClient"
 		]
 	},
 	"mixins": [

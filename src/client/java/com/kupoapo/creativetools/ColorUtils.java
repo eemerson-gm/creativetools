@@ -18,13 +18,13 @@ public class ColorUtils {
      * Initialize the color list that we have.
      */
     private ArrayList<ColorName> initColorList() {
-        ArrayList<ColorName> colorList = new ArrayList<ColorName>();colorList.add(new ColorName("minecraft:acacia_log", 0x5C, 0x56, 0x4D));
+        ArrayList<ColorName> colorList = new ArrayList<ColorName>();
+        colorList.add(new ColorName("minecraft:acacia_log", 0x5C, 0x56, 0x4D));
         colorList.add(new ColorName("minecraft:acacia_planks", 0xA0, 0x56, 0x2F));
         colorList.add(new ColorName("minecraft:amethyst_block", 0x6B, 0x4D, 0xA5));
         colorList.add(new ColorName("minecraft:andesite", 0x9D, 0x9E, 0x9A));
         colorList.add(new ColorName("minecraft:bedrock", 0x3F, 0x3F, 0x3F));
-        colorList.add(new ColorName("minecraft:beehive_end", 0xBC, 0x98, 0x60));
-        colorList.add(new ColorName("minecraft:birch_log", 0xF6, 0xF5, 0xF4));
+        colorList.add(new ColorName("minecraft:beehive", 0xBC, 0x98, 0x60));
         colorList.add(new ColorName("minecraft:birch_planks", 0xD1, 0xC0, 0x83));
         colorList.add(new ColorName("minecraft:black_concrete", 0x08, 0x0A, 0x0F));
         colorList.add(new ColorName("minecraft:black_concrete_powder", 0x12, 0x14, 0x1A));
@@ -68,7 +68,6 @@ public class ColorUtils {
         colorList.add(new ColorName("minecraft:cracked_nether_bricks", 0x3B, 0x1B, 0x21));
         colorList.add(new ColorName("minecraft:cracked_polished_blackstone_bricks", 0x1F, 0x16, 0x18));
         colorList.add(new ColorName("minecraft:cracked_stone_bricks", 0x8D, 0x8B, 0x8D));
-        colorList.add(new ColorName("minecraft:crimson_nylium", 0x72, 0x1E, 0x1E));
         colorList.add(new ColorName("minecraft:crimson_planks", 0x7A, 0x39, 0x53));
         colorList.add(new ColorName("minecraft:crimson_stem", 0x4A, 0x1F, 0x27));
         colorList.add(new ColorName("minecraft:crying_obsidian", 0x06, 0x04, 0x0C));
@@ -105,8 +104,6 @@ public class ColorUtils {
         colorList.add(new ColorName("minecraft:end_stone_bricks", 0xE7, 0xF2, 0xB1));
         colorList.add(new ColorName("minecraft:exposed_copper", 0xB4, 0x7F, 0x6F));
         colorList.add(new ColorName("minecraft:exposed_cut_copper", 0xA2, 0x7D, 0x65));
-        colorList.add(new ColorName("minecraft:farmland", 0xA6, 0x78, 0x52));
-        colorList.add(new ColorName("minecraft:farmland_moist", 0x42, 0x22, 0x0A));
         colorList.add(new ColorName("minecraft:gilded_blackstone", 0x22, 0x1A, 0x1B));
         colorList.add(new ColorName("minecraft:glowstone", 0x78, 0x4E, 0x27));
         colorList.add(new ColorName("minecraft:gold_block", 0xED, 0xBB, 0x2A));
@@ -125,7 +122,6 @@ public class ColorUtils {
         colorList.add(new ColorName("minecraft:green_wool", 0x57, 0x71, 0x18));
         colorList.add(new ColorName("minecraft:honeycomb_block", 0xD6, 0x7A, 0x06));
         colorList.add(new ColorName("minecraft:ice", 0x89, 0xB1, 0xFC));
-        colorList.add(new ColorName("minecraft:iron_bars", 0x6D, 0x70, 0x6B));
         colorList.add(new ColorName("minecraft:iron_block", 0xE8, 0xE8, 0xE8));
         colorList.add(new ColorName("minecraft:iron_ore", 0x76, 0x75, 0x74));
         colorList.add(new ColorName("minecraft:jungle_log", 0x6C, 0x54, 0x21));
@@ -152,7 +148,7 @@ public class ColorUtils {
         colorList.add(new ColorName("minecraft:magenta_glazed_terracotta", 0xBB, 0x43, 0xB2));
         colorList.add(new ColorName("minecraft:magenta_terracotta", 0x92, 0x56, 0x6B));
         colorList.add(new ColorName("minecraft:magenta_wool", 0xB2, 0x3A, 0xA8));
-        colorList.add(new ColorName("minecraft:magma", 0x56, 0x1F, 0x1F));
+        colorList.add(new ColorName("minecraft:magma_block", 0x56, 0x1F, 0x1F));
         colorList.add(new ColorName("minecraft:moss_block", 0x4A, 0x60, 0x29));
         colorList.add(new ColorName("minecraft:mossy_cobblestone", 0x5C, 0x6C, 0x40));
         colorList.add(new ColorName("minecraft:mossy_stone_bricks", 0x82, 0x81, 0x82));
@@ -186,9 +182,6 @@ public class ColorUtils {
         colorList.add(new ColorName("minecraft:polished_deepslate", 0x2D, 0x2D, 0x2D));
         colorList.add(new ColorName("minecraft:polished_diorite", 0xD8, 0xD6, 0xD8));
         colorList.add(new ColorName("minecraft:polished_granite", 0xA7, 0x77, 0x65));
-        colorList.add(new ColorName("minecraft:potted_azalea_bush_plant", 0x4E, 0x66, 0x2A));
-        colorList.add(new ColorName("minecraft:potted_flowering_azalea_bush_plant", 0x52, 0x59, 0x24));
-        colorList.add(new ColorName("minecraft:powder_snow", 0xFE, 0xFE, 0xFE));
         colorList.add(new ColorName("minecraft:prismarine", 0x52, 0x95, 0x84));
         colorList.add(new ColorName("minecraft:prismarine_bricks", 0x5D, 0xA8, 0x9D));
         colorList.add(new ColorName("minecraft:purple_concrete", 0x65, 0x20, 0x9C));

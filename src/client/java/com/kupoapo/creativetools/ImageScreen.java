@@ -6,6 +6,7 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.tooltip.Tooltip;
 import net.minecraft.client.gui.widget.ButtonWidget;
+import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.text.Text;
 
 import javax.imageio.ImageIO;
@@ -13,6 +14,10 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
+
+import static com.kupoapo.creativetools.CreativeToolsClient.delay;
+import static com.kupoapo.creativetools.CreativeToolsClient.isRunning;
 
 @Environment(EnvType.CLIENT)
 public class ImageScreen extends Screen {
@@ -40,10 +45,14 @@ public class ImageScreen extends Screen {
                                 }
                                 BufferedImage finalBufferedImage = bufferedImage;
                                 ColorUtils colorUtils = new ColorUtils();
+                                int[] position = {(int)client.player.getX(), (int)client.player.getY(), (int)client.player.getZ()};
+                                isRunning = true;
                                 Thread placeThread = new Thread(){
                                     public void run(){
+                                        runner:
                                         for(int h = 0; h < finalBufferedImage.getHeight(); h++){
                                             for(int w = 0; w < finalBufferedImage.getWidth(); w++){
+                                                if(!isRunning) break runner;
                                                 Color color = new Color(finalBufferedImage.getRGB(w, (finalBufferedImage.getHeight() - 1) - h), true);
                                                 if(color.getAlpha() != 0) {
                                                     try {
@@ -52,21 +61,32 @@ public class ImageScreen extends Screen {
                                                         throw new RuntimeException(e);
                                                     }
                                                     String colorName = colorUtils.getColorNameFromColor(color);
-                                                    client.player.networkHandler.sendChatCommand("setblock ~" + Integer.toString(w + 2) + " ~" + Integer.toString(h) + " ~2 " + colorName);
+                                                    client.player.networkHandler.sendChatCommand("setblock " + (position[0] + w + 2) + " " + (position[1] + h) + " " + position[2] + " " + colorName);
                                                 }
                                             }
                                         }
+                                        isRunning = false;
                                     }
                                 };
                                 placeThread.start();
                                 thisScreen.close();
                             })
                             .dimensions((width / 2) - 100, f * 20, 200, 20)
-                            .tooltip(Tooltip.of(Text.literal("Click to generate the image.")))
+                            .tooltip(Tooltip.of(Text.literal("Click to generate the blocks")))
                             .build();
                     addDrawableChild(button);
                 }
             }
+        }
+        if(isRunning){
+            var button = ButtonWidget.builder(Text.literal("Stop"), b -> {
+                        isRunning = false;
+                        thisScreen.close();
+                    })
+                    .dimensions(width - 150, 0, 150, 20)
+                    .tooltip(Tooltip.of(Text.literal("Stops all running builds")))
+                    .build();
+            addDrawableChild(button);
         }
     }
 
