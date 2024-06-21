@@ -92,7 +92,7 @@ public class ImageScreen extends Screen {
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        this.renderBackground(context);
+        // this.renderBackground(context);
         super.render(context, mouseX, mouseY, delta);
     }
 }
