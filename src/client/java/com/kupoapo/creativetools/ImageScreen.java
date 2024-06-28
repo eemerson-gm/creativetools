@@ -31,6 +31,7 @@ public class ImageScreen extends Screen {
                 var file = listOfFiles[f];
                 if (file.isFile()) {
                     var button = ButtonWidget.builder(Text.literal(file.getName()), b -> {
+                                assert client != null;
                                 ImageToBlocks imageToBlocks = new ImageToBlocks(file, client);
                                 Thread placeThread = new Thread(imageToBlocks::buildPortrait);
                                 placeThread.start();

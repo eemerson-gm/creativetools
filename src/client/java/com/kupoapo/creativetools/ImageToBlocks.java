@@ -40,7 +40,8 @@ public class ImageToBlocks {
         String[][] imageBlocks = new String[bufferedImage.getHeight()][bufferedImage.getWidth()];
         for(int h = 0; h < bufferedImage.getHeight(); h++){
             for(int w = 0; w < bufferedImage.getWidth(); w++){
-                Color color = new Color(bufferedImage.getRGB(w, (bufferedImage.getHeight() - 1) - h), true);
+                int inverseY = bufferedImage.getHeight() - h - 1;
+                Color color = new Color(bufferedImage.getRGB(w, inverseY), true);
                 if(color.getAlpha() != 0) {
                     String blockID = colorUtils.getColorNameFromColor(color);
                     imageBlocks[h][w] = blockID;
@@ -54,7 +55,7 @@ public class ImageToBlocks {
         for(int h = 0; h < this.imageBlocks.length; h++){
             for(int w = 0; w < this.imageBlocks[h].length; w++){
                 if(!isRunning) break;
-                String blockID = this.imageBlocks[w][h];
+                String blockID = this.imageBlocks[h][w];
                 if(blockID != null){
                     assert client.player != null;
                     client.player.networkHandler.sendChatCommand("setblock " + (this.clientPosition[0] + w + 2) + " " + (this.clientPosition[1] + h) + " " + this.clientPosition[2] + " " + blockID);
