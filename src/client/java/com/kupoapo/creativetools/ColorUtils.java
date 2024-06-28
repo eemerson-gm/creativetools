@@ -3,6 +3,8 @@ package com.kupoapo.creativetools;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import static com.kupoapo.creativetools.CreativeToolsClient.isMap;
+
 /**
  * Java Code to get a color name from rgb/hex value/awt color
  *
@@ -198,6 +200,72 @@ public class ColorUtils {
         return colorList;
     }
 
+    private ArrayList<ColorName> initMapColorList() {
+        ArrayList<ColorName> colorList = new ArrayList<ColorName>();
+        colorList.add(new ColorName("minecraft:slime_block", 127, 178, 56));
+        colorList.add(new ColorName("minecraft:sandstone", 247, 233, 163));
+        colorList.add(new ColorName("minecraft:cobweb", 199, 199, 199));
+        colorList.add(new ColorName("minecraft:redstone_block", 255, 0, 0));
+        colorList.add(new ColorName("minecraft:packed_ice", 160, 160, 255));
+        colorList.add(new ColorName("minecraft:iron_block", 167, 167, 167));
+        colorList.add(new ColorName("minecraft:oak_leaves", 0, 124, 0));
+        colorList.add(new ColorName("minecraft:snow_block", 255, 255, 255));
+        colorList.add(new ColorName("minecraft:clay", 164, 168, 184));
+        colorList.add(new ColorName("minecraft:dirt", 151, 109, 77));
+        colorList.add(new ColorName("minecraft:stone", 112, 112, 112));
+//        colorList.add(new ColorName("minecraft:water", 64, 64, 255));
+        colorList.add(new ColorName("minecraft:oak_planks", 143, 119, 72));
+        colorList.add(new ColorName("minecraft:quartz_block", 255, 252, 245));
+        colorList.add(new ColorName("minecraft:orange_wool", 216, 127, 51));
+        colorList.add(new ColorName("minecraft:magenta_wool", 178, 76, 216));
+        colorList.add(new ColorName("minecraft:light_blue_wool", 102, 153, 216));
+        colorList.add(new ColorName("minecraft:yellow_wool", 229, 229, 51));
+        colorList.add(new ColorName("minecraft:lime_wool", 127, 204, 25));
+        colorList.add(new ColorName("minecraft:pink_wool", 242, 127, 165));
+        colorList.add(new ColorName("minecraft:gray_wool", 76, 76, 76));
+        colorList.add(new ColorName("minecraft:light_gray_wool", 153, 153, 153));
+        colorList.add(new ColorName("minecraft:cyan_wool", 76, 127, 153));
+        colorList.add(new ColorName("minecraft:purple_wool", 127, 63, 178));
+        colorList.add(new ColorName("minecraft:blue_wool", 51, 76, 178));
+        colorList.add(new ColorName("minecraft:brown_wool", 102, 76, 51));
+        colorList.add(new ColorName("minecraft:green_wool", 102, 127, 51));
+        colorList.add(new ColorName("minecraft:red_wool", 153, 51, 51));
+        colorList.add(new ColorName("minecraft:black_wool", 25, 25, 25));
+        colorList.add(new ColorName("minecraft:gold_block", 250, 238, 77));
+        colorList.add(new ColorName("minecraft:diamond_block", 92, 219, 213));
+        colorList.add(new ColorName("minecraft:lapis_block", 74, 128, 255));
+        colorList.add(new ColorName("minecraft:emerald_block", 0, 217, 58));
+        colorList.add(new ColorName("minecraft:podzol", 129, 86, 49));
+        colorList.add(new ColorName("minecraft:netherrack", 112, 2, 0));
+        colorList.add(new ColorName("minecraft:white_terracotta", 209, 177, 161));
+        colorList.add(new ColorName("minecraft:orange_terracotta", 159, 82, 36));
+        colorList.add(new ColorName("minecraft:magenta_terracotta", 149, 87, 108));
+        colorList.add(new ColorName("minecraft:light_blue_terracotta", 112, 108, 138));
+        colorList.add(new ColorName("minecraft:yellow_terracotta", 186, 133, 36));
+        colorList.add(new ColorName("minecraft:lime_terracotta", 103, 117, 53));
+        colorList.add(new ColorName("minecraft:pink_terracotta", 160, 77, 78));
+        colorList.add(new ColorName("minecraft:gray_terracotta", 57, 41, 35));
+        colorList.add(new ColorName("minecraft:light_gray_terracotta", 135, 107, 98));
+        colorList.add(new ColorName("minecraft:cyan_terracotta", 87, 92, 92));
+        colorList.add(new ColorName("minecraft:purple_terracotta", 122, 73, 88));
+        colorList.add(new ColorName("minecraft:blue_terracotta", 76, 62, 92));
+        colorList.add(new ColorName("minecraft:brown_terracotta", 76, 50, 35));
+        colorList.add(new ColorName("minecraft:green_terracotta", 76, 82, 42));
+        colorList.add(new ColorName("minecraft:red_terracotta", 142, 60, 46));
+        colorList.add(new ColorName("minecraft:black_terracotta", 37, 22, 16));
+        colorList.add(new ColorName("minecraft:crimson_nylium", 189, 48, 49));
+        colorList.add(new ColorName("minecraft:crimson_stem", 148, 63, 97));
+        colorList.add(new ColorName("minecraft:crimson_hyphae", 92, 25, 29));
+        colorList.add(new ColorName("minecraft:warped_nylium", 22, 126, 134));
+        colorList.add(new ColorName("minecraft:warped_stem", 58, 142, 140));
+        colorList.add(new ColorName("minecraft:warped_hyphae", 86, 44, 62));
+        colorList.add(new ColorName("minecraft:warped_wart_block", 20, 180, 133));
+        colorList.add(new ColorName("minecraft:deepslate", 100, 100, 100));
+        colorList.add(new ColorName("minecraft:raw_iron_block", 216, 175, 147));
+        colorList.add(new ColorName("minecraft:verdant_froglight", 127, 167, 150));
+        return colorList;
+    }
+
     /**
      * Get the closest color name from our list
      *
@@ -207,7 +275,7 @@ public class ColorUtils {
      * @return
      */
     public String getColorNameFromRgb(int r, int g, int b) {
-        ArrayList<ColorName> colorList = initColorList();
+        ArrayList<ColorName> colorList = isMap ? initMapColorList() : initColorList();
         ColorName closestMatch = null;
         int minMSE = Integer.MAX_VALUE;
         int mse;
@@ -224,24 +292,6 @@ public class ColorUtils {
         } else {
             return "No matched color name.";
         }
-    }
-
-    /**
-     * Convert hexColor to rgb, then call getColorNameFromRgb(r, g, b)
-     *
-     * @param hexColor
-     * @return
-     */
-    public String getColorNameFromHex(int hexColor) {
-        int r = (hexColor & 0xFF0000) >> 16;
-        int g = (hexColor & 0xFF00) >> 8;
-        int b = (hexColor & 0xFF);
-        return getColorNameFromRgb(r, g, b);
-    }
-
-    public int colorToHex(Color c) {
-        return Integer.decode("0x"
-                + Integer.toHexString(c.getRGB()).substring(2));
     }
 
     public String getColorNameFromColor(Color color) {

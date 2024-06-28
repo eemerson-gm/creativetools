@@ -12,9 +12,8 @@ import java.io.File;
 public class CreativeToolsClient implements ClientModInitializer {
 
 	private static KeyBinding imageKeyBinding;
-
 	public static boolean isRunning = false;
-	public static int delay = 10;
+	public static boolean isMap = false;
 
 	@Override
 	public void onInitializeClient() {

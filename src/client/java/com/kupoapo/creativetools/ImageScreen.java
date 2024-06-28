@@ -11,7 +11,7 @@ import net.minecraft.text.Text;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
-import static com.kupoapo.creativetools.CreativeToolsClient.isRunning;
+import static com.kupoapo.creativetools.CreativeToolsClient.*;
 
 @Environment(EnvType.CLIENT)
 public class ImageScreen extends Screen {
@@ -33,8 +33,7 @@ public class ImageScreen extends Screen {
                     var button = ButtonWidget.builder(Text.literal(file.getName()), b -> {
                                 assert client != null;
                                 ImageToBlocks imageToBlocks = new ImageToBlocks(file, client);
-                                Thread placeThread = new Thread(imageToBlocks::buildPortrait);
-                                placeThread.start();
+                                imageToBlocks.start();
                                 thisScreen.close();
                             })
                             .dimensions((width / 2) - 100, f * 20, 200, 20)
@@ -49,11 +48,23 @@ public class ImageScreen extends Screen {
                         isRunning = false;
                         thisScreen.close();
                     })
-                    .dimensions(width - 150, 0, 150, 20)
+                    .dimensions(width - 80, 0, 80, 20)
                     .tooltip(Tooltip.of(Text.literal("Stops all running builds")))
                     .build();
             addDrawableChild(button);
         }
+        var button = ButtonWidget.builder(Text.literal(getButtonLabel()), b -> {
+                    isMap = !isMap;
+                    b.setMessage(Text.literal(getButtonLabel()));
+                })
+                .dimensions(0, 0, 80, 20)
+                .tooltip(Tooltip.of(Text.literal("Change the type of image generated")))
+                .build();
+        addDrawableChild(button);
+    }
+
+    private String getButtonLabel() {
+        return isMap ? "Map" : "Portrait";
     }
 
     @Override
