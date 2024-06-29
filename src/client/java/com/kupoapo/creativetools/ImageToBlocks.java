@@ -20,6 +20,7 @@ public class ImageToBlocks {
     MinecraftClient client;
     int[] clientPosition;
     String[][] imageBlocks;
+    int offset = 0;
 
     public ImageToBlocks(File file, MinecraftClient client) {
         this.client = client;
@@ -63,8 +64,11 @@ public class ImageToBlocks {
     }
     private void loopBlocks (Function3<Integer, Integer, String, Void> callback) {
         isRunning = true;
-        for(int h = 0; h < this.imageBlocks.length; h++){
-            for(int w = 0; w < this.imageBlocks[h].length; w++) {
+        int width = this.imageBlocks[0].length;
+        int height = this.imageBlocks.length;
+        for(int w = 0; w < width; w++){
+            offset = 0;
+            for(int h = 0; h < height; h++) {
                 if(!isRunning) break;
                 String blockID = this.imageBlocks[h][w];
                 if(blockID != null) {
@@ -89,7 +93,9 @@ public class ImageToBlocks {
     public void buildMap() {
         loopBlocks((x, y, blockID) -> {
             assert client.player != null;
-            client.player.networkHandler.sendChatCommand("setblock " + (this.clientPosition[0] - x - 1) + " " + this.clientPosition[1] + " " + (this.clientPosition[2] - y) + " " + blockID);
+            String[] blockNameAndPos = blockID.split("~");
+            client.player.networkHandler.sendChatCommand("setblock " + (this.clientPosition[0] - x - 1) + " " + (this.clientPosition[1] + offset) + " " + (this.clientPosition[2] - y) + " " + blockNameAndPos[0]);
+            offset += Integer.parseInt(blockNameAndPos[1]);
             return null;
         });
     }
