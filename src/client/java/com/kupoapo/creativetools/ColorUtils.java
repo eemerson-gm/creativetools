@@ -201,7 +201,7 @@ public class ColorUtils {
     }
 
     private ArrayList<ColorName> initMapColorList() {
-        ArrayList<ColorName> colorList = new ArrayList<ColorName>();
+        ArrayList<ColorName> colorList = new ArrayList<>();
         colorList.add(new ColorName("minecraft:slime_block", 127, 178, 56));
         colorList.add(new ColorName("minecraft:sandstone", 247, 233, 163));
         colorList.add(new ColorName("minecraft:cobweb", 199, 199, 199));
@@ -213,7 +213,7 @@ public class ColorUtils {
         colorList.add(new ColorName("minecraft:clay", 164, 168, 184));
         colorList.add(new ColorName("minecraft:dirt", 151, 109, 77));
         colorList.add(new ColorName("minecraft:stone", 112, 112, 112));
-//        colorList.add(new ColorName("minecraft:water", 64, 64, 255));
+        // colorList.add(new ColorName("minecraft:water", 64, 64, 255));
         colorList.add(new ColorName("minecraft:oak_planks", 143, 119, 72));
         colorList.add(new ColorName("minecraft:quartz_block", 255, 252, 245));
         colorList.add(new ColorName("minecraft:orange_wool", 216, 127, 51));
@@ -267,7 +267,7 @@ public class ColorUtils {
     }
 
     private ArrayList<ColorName> initMapStaircaseColorList() {
-        ArrayList<ColorName> colorList = new ArrayList<ColorName>();
+        ArrayList<ColorName> colorList = new ArrayList<>();
         colorList.add(new ColorName("minecraft:slime_block~1",89,125,39));
         colorList.add(new ColorName("minecraft:slime_block~0",109,153,48));
         colorList.add(new ColorName("minecraft:slime_block~-1",127,178,56));
@@ -451,14 +451,6 @@ public class ColorUtils {
         return colorList;
     }
 
-    /**
-     * Get the closest color name from our list
-     *
-     * @param r
-     * @param g
-     * @param b
-     * @return
-     */
     public String getColorNameFromRgb(int r, int g, int b) {
         ArrayList<ColorName> colorList = isMap ? initMapStaircaseColorList() : initColorList();
         ColorName closestMatch = null;
@@ -502,8 +494,7 @@ public class ColorUtils {
         }
 
         public int computeMSE(int pixR, int pixG, int pixB) {
-            return (int) (((pixR - r) * (pixR - r) + (pixG - g) * (pixG - g) + (pixB - b)
-                    * (pixB - b)) / 3);
+            return ((pixR - r) * (pixR - r) + (pixG - g) * (pixG - g) + (pixB - b) * (pixB - b)) / 3;
         }
 
         public int getR() {

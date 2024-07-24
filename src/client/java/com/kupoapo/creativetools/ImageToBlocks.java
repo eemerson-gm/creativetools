@@ -11,8 +11,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-import static com.kupoapo.creativetools.CreativeToolsClient.isRunning;
-import static com.kupoapo.creativetools.CreativeToolsClient.isMap;
+import static com.kupoapo.creativetools.CreativeToolsClient.*;
 
 @Environment(EnvType.CLIENT)
 public class ImageToBlocks {
@@ -75,7 +74,7 @@ public class ImageToBlocks {
                     callback.apply(w, h, blockID);
                 }
                 try {
-                    Thread.sleep(10);
+                    Thread.sleep(SLEEP_TIMES[sleepIndex]);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
@@ -86,7 +85,7 @@ public class ImageToBlocks {
     public void buildPortrait() {
         loopBlocks((x, y, blockID) -> {
             assert client.player != null;
-            client.player.networkHandler.sendChatCommand("setblock " + (this.clientPosition[0] + x + 2) + " " + (this.clientPosition[1] + y) + " " + this.clientPosition[2] + " " + blockID);
+            client.player.networkHandler.sendChatCommand("setblock " + (this.clientPosition[0] + x + 1) + " " + (this.clientPosition[1] + y) + " " + this.clientPosition[2] + " " + blockID);
             return null;
         });
     }
@@ -94,7 +93,7 @@ public class ImageToBlocks {
         loopBlocks((x, y, blockID) -> {
             assert client.player != null;
             String[] blockNameAndPos = blockID.split("~");
-            client.player.networkHandler.sendChatCommand("setblock " + (this.clientPosition[0] - x - 1) + " " + (this.clientPosition[1] + offset) + " " + (this.clientPosition[2] - y) + " " + blockNameAndPos[0]);
+            client.player.networkHandler.sendChatCommand("setblock " + (this.clientPosition[0] - x - 3) + " " + (this.clientPosition[1] + offset) + " " + (this.clientPosition[2] - y) + " " + blockNameAndPos[0]);
             offset += Integer.parseInt(blockNameAndPos[1]);
             return null;
         });
