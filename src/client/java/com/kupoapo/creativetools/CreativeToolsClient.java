@@ -7,23 +7,16 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.render.*;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
-import net.minecraft.util.math.RotationAxis;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.shape.VoxelShapes;
-import org.joml.Matrix4f;
 import org.joml.Vector3d;
 import org.joml.Vector4f;
 import org.lwjgl.glfw.GLFW;
-import org.lwjgl.opengl.GL11;
 
 import java.io.File;
 
@@ -34,6 +27,7 @@ public class CreativeToolsClient implements ClientModInitializer {
 	public static boolean isRunning = false;
 	public static boolean isMap = false;
 	public static boolean isHighlight = false;
+	public static boolean isStaircase = false;
 	public static int sleepIndex = 2;
 	public static final int[] SLEEP_TIMES = { 1, 5, 10, 15, 20, 30 };
 

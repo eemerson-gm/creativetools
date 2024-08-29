@@ -53,14 +53,33 @@ public class ImageScreen extends Screen {
             isMap = !isMap;
             b.setMessage(Text.literal(getImageTypeLabel()));
         });
-        addButton(getHighlightLabel(), 0, 20, 80, 20, "Highlight the starting block", b -> {
+        addButton(getStaircaseLabel(), 0, 20, 80, 20, "Use stair casing when creating map", b -> {
+            isStaircase = !isStaircase;
+            b.setMessage(Text.literal(getStaircaseLabel()));
+        });
+        addButton(getHighlightLabel(), 0, 40, 80, 20, "Highlight the starting block", b -> {
             isHighlight = !isHighlight;
             b.setMessage(Text.literal(getHighlightLabel()));
         });
-        addButton(getSleepTimeLabel(), 0, 40, 80, 20, "Time per block placement", b -> {
+        addButton(getSleepTimeLabel(), 0, 60, 80, 20, "Time per block placement", b -> {
             sleepIndex = (sleepIndex + 1) % SLEEP_TIMES.length;
             b.setMessage(Text.literal(getSleepTimeLabel()));
         });
+//        var nameInput = new TextFieldWidget(this.textRenderer, width - 100, 0, 100, 20, Text.literal(""));
+//        var colorInput = new TextFieldWidget(this.textRenderer, width - 100, 20, 100, 20, Text.literal(""));
+//        var styleInput = new TextFieldWidget(this.textRenderer, width - 100, 40, 100, 20, Text.literal(""));
+//        nameInput.setTooltip(Tooltip.of(Text.literal("Name")));
+//        colorInput.setTooltip(Tooltip.of(Text.literal("Color")));
+//        styleInput.setTooltip(Tooltip.of(Text.literal("Style")));
+//        addDrawableChild(nameInput);
+//        addDrawableChild(colorInput);
+//        addDrawableChild(styleInput);
+//        addButton("Summon", width - 100, 60, 100, 20, "Click to summon armor stand", b -> {
+//            assert client != null;
+//            assert client.player != null;
+//            var styleType = !Objects.equals(styleInput.getText(), "") ? "\"" + styleInput.getText() + "\":true," : "";
+//            client.player.networkHandler.sendChatCommand("summon armor_stand ~ ~ ~ {ShowArms:1b,Invisible:1b,NoBasePlate:1b,CustomName:'[{\"text\":\"" + nameInput.getText() + "\"," + styleType + "\"color\":\"" + colorInput.getText() + "\"}]',CustomNameVisible:1b,Invulnerable:1b,NoAI:1b,NoGravity:1b,PersistenceRequired:1b,Silent:1b}");
+//        });
     }
 
     private String getImageTypeLabel() {
@@ -69,6 +88,10 @@ public class ImageScreen extends Screen {
 
     private String getHighlightLabel() {
         return isHighlight ? "Enabled" : "Disabled";
+    }
+
+    private String getStaircaseLabel() {
+        return isStaircase ? "Staircase" : "Flat";
     }
 
     private String getSleepTimeLabel() {

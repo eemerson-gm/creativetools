@@ -3,6 +3,7 @@ package com.kupoapo.creativetools;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import static com.kupoapo.creativetools.CreativeToolsClient.isStaircase;
 import static com.kupoapo.creativetools.CreativeToolsClient.isMap;
 
 /**
@@ -451,8 +452,18 @@ public class ColorUtils {
         return colorList;
     }
 
+    public ArrayList<ColorName> getColorMap() {
+        if(isMap) {
+            if(isStaircase) {
+                return initMapStaircaseColorList();
+            }
+            return initMapColorList();
+        }
+        return initColorList();
+    }
+
     public String getColorNameFromRgb(int r, int g, int b) {
-        ArrayList<ColorName> colorList = isMap ? initMapStaircaseColorList() : initColorList();
+        ArrayList<ColorName> colorList = getColorMap();
         ColorName closestMatch = null;
         int minMSE = Integer.MAX_VALUE;
         int mse;

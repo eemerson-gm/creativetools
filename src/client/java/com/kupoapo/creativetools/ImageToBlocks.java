@@ -72,11 +72,11 @@ public class ImageToBlocks {
                 String blockID = this.imageBlocks[h][w];
                 if(blockID != null) {
                     callback.apply(w, h, blockID);
-                }
-                try {
-                    Thread.sleep(SLEEP_TIMES[sleepIndex]);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
+                    try {
+                        Thread.sleep(SLEEP_TIMES[sleepIndex]);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
         }
@@ -92,9 +92,15 @@ public class ImageToBlocks {
     public void buildMap() {
         loopBlocks((x, y, blockID) -> {
             assert client.player != null;
-            String[] blockNameAndPos = blockID.split("~");
+            String[] blockNameAndPos =  { blockID, "0" };
+            if(isStaircase) {
+                blockNameAndPos = blockID.split("~");
+            }
             client.player.networkHandler.sendChatCommand("setblock " + (this.clientPosition[0] - x - 3) + " " + (this.clientPosition[1] + offset) + " " + (this.clientPosition[2] - y) + " " + blockNameAndPos[0]);
             offset += Integer.parseInt(blockNameAndPos[1]);
+            var currentY = this.clientPosition[1] + offset;
+            if(currentY < -63) offset = 0;
+            if(currentY > 319) offset = 0;
             return null;
         });
     }
