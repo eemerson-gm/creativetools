@@ -19,11 +19,17 @@ import org.joml.Vector4f;
 import org.lwjgl.glfw.GLFW;
 
 import java.io.File;
+import java.util.EnumMap;
 
 @Environment(EnvType.CLIENT)
 public class CreativeToolsClient implements ClientModInitializer {
-
+	public enum Settings {
+		Map,
+		Highlight,
+		Staircase,
+	}
 	private static KeyBinding imageKeyBinding;
+	public static EnumMap<Settings, Boolean> imageSettings = new EnumMap<>(Settings.class);
 	public static boolean isRunning = false;
 	public static boolean isMap = false;
 	public static boolean isHighlight = false;
@@ -33,6 +39,10 @@ public class CreativeToolsClient implements ClientModInitializer {
 
 	@Override
 	public void onInitializeClient() {
+
+		setSetting(Settings.Map, false);
+		setSetting(Settings.Highlight, false);
+		setSetting(Settings.Staircase, false);
 
 		(new File("images")).mkdir();
 
@@ -86,5 +96,13 @@ public class CreativeToolsClient implements ClientModInitializer {
 			matrixStack.pop();
 			RenderSystem.disableDepthTest();
 		});
+	}
+
+	public void setSetting(Settings setting, Boolean value) {
+		imageSettings.put(setting, value);
+	}
+
+	public Boolean getSetting(Settings setting) {
+		return imageSettings.get(setting);
 	}
 }

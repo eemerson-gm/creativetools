@@ -25,6 +25,9 @@ public class ImageScreen extends Screen {
                 .build();
         addDrawableChild(button);
     }
+    protected void addSwitchButton(String text, int x, int y, String tooltip) {
+
+    }
 
     @Override
     protected void init() {
