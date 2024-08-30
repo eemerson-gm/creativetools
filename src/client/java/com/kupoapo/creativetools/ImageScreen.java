@@ -25,8 +25,12 @@ public class ImageScreen extends Screen {
                 .build();
         addDrawableChild(button);
     }
-    protected void addSwitchButton(String text, int x, int y, String tooltip) {
-
+    protected void addSettingButton(Settings setting, int x, int y, String tooltip, String enabledLabel, String disabledLabel) {
+        var settingText = getSetting(setting) ? enabledLabel : disabledLabel;
+        addButton(settingText, x, y, 80, 20, tooltip, b -> {
+            setSetting(setting, !getSetting(setting));
+            b.setMessage(Text.literal(getSetting(setting) ? enabledLabel : disabledLabel));
+        });
     }
 
     @Override
@@ -52,18 +56,9 @@ public class ImageScreen extends Screen {
                 isRunning = false;
             });
         }
-        addButton(getImageTypeLabel(), 0, 0, 80, 20, "Image type being generated", b -> {
-            isMap = !isMap;
-            b.setMessage(Text.literal(getImageTypeLabel()));
-        });
-        addButton(getStaircaseLabel(), 0, 20, 80, 20, "Use stair casing when creating map", b -> {
-            isStaircase = !isStaircase;
-            b.setMessage(Text.literal(getStaircaseLabel()));
-        });
-        addButton(getHighlightLabel(), 0, 40, 80, 20, "Highlight the starting block", b -> {
-            isHighlight = !isHighlight;
-            b.setMessage(Text.literal(getHighlightLabel()));
-        });
+        addSettingButton(Settings.Map, 0, 0, "Sets building type", "Map", "Portrait");
+        addSettingButton(Settings.Staircase, 0, 20, "Sets map to staircase", "Staircase", "Flat");
+        addSettingButton(Settings.Highlight, 0, 40, "Sets start block highlight", "Enabled", "Disabled");
         addButton(getSleepTimeLabel(), 0, 60, 80, 20, "Time per block placement", b -> {
             sleepIndex = (sleepIndex + 1) % SLEEP_TIMES.length;
             b.setMessage(Text.literal(getSleepTimeLabel()));
@@ -83,18 +78,6 @@ public class ImageScreen extends Screen {
 //            var styleType = !Objects.equals(styleInput.getText(), "") ? "\"" + styleInput.getText() + "\":true," : "";
 //            client.player.networkHandler.sendChatCommand("summon armor_stand ~ ~ ~ {ShowArms:1b,Invisible:1b,NoBasePlate:1b,CustomName:'[{\"text\":\"" + nameInput.getText() + "\"," + styleType + "\"color\":\"" + colorInput.getText() + "\"}]',CustomNameVisible:1b,Invulnerable:1b,NoAI:1b,NoGravity:1b,PersistenceRequired:1b,Silent:1b}");
 //        });
-    }
-
-    private String getImageTypeLabel() {
-        return isMap ? "Map" : "Portrait";
-    }
-
-    private String getHighlightLabel() {
-        return isHighlight ? "Enabled" : "Disabled";
-    }
-
-    private String getStaircaseLabel() {
-        return isStaircase ? "Staircase" : "Flat";
     }
 
     private String getSleepTimeLabel() {

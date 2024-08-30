@@ -25,6 +25,7 @@ public class ImageToBlocks {
 
     public ImageToBlocks(File file, MinecraftClient client) {
         this.client = client;
+        assert client.player != null;
         this.startPos = new int[]{(int) client.player.getX(), (int) client.player.getY(), (int) client.player.getZ()};
         this.imageBlocks = fileToBlocks(file);
     }
@@ -33,7 +34,7 @@ public class ImageToBlocks {
         placeThread.start();
     }
     private Thread getBuildThread() {
-        if(isMap){
+        if(getSetting(Settings.Map)){
             return new Thread(this::buildMap);
         }
         return new Thread(this::buildPortrait);
@@ -65,7 +66,7 @@ public class ImageToBlocks {
     }
     private int roundToMapChunk(int value) {
         var mapRadius = mapSize / 2;
-        return ((int) Math.floor((double) ((value + mapRadius) / mapSize) * mapSize)) + mapRadius;
+        return ((int) Math.round((double)value / mapSize) * mapSize) + mapRadius;
     }
     private void loopBlocks (Function3<Integer, Integer, String, Void> callback) {
         isRunning = true;
@@ -108,7 +109,7 @@ public class ImageToBlocks {
             var mapY = mapStartY + offset;
             var mapZ = mapStartZ - y - 1;
             String[] blockNameAndPos =  { blockID, "0" };
-            if(isStaircase) {
+            if(getSetting(Settings.Staircase)) {
                 blockNameAndPos = blockID.split("~");
             }
             client.player.networkHandler.sendChatCommand("setblock " + mapX + " " + mapY + " " + mapZ + " " + blockNameAndPos[0]);

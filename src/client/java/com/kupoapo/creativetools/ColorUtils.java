@@ -3,8 +3,7 @@ package com.kupoapo.creativetools;
 import java.awt.Color;
 import java.util.ArrayList;
 
-import static com.kupoapo.creativetools.CreativeToolsClient.isStaircase;
-import static com.kupoapo.creativetools.CreativeToolsClient.isMap;
+import static com.kupoapo.creativetools.CreativeToolsClient.getSetting;
 
 /**
  * Java Code to get a color name from rgb/hex value/awt color
@@ -453,8 +452,8 @@ public class ColorUtils {
     }
 
     public ArrayList<ColorName> getColorMap() {
-        if(isMap) {
-            if(isStaircase) {
+        if(getSetting(CreativeToolsClient.Settings.Map)) {
+            if(getSetting(CreativeToolsClient.Settings.Staircase)) {
                 return initMapStaircaseColorList();
             }
             return initMapColorList();

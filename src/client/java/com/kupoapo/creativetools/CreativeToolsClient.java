@@ -31,15 +31,11 @@ public class CreativeToolsClient implements ClientModInitializer {
 	private static KeyBinding imageKeyBinding;
 	public static EnumMap<Settings, Boolean> imageSettings = new EnumMap<>(Settings.class);
 	public static boolean isRunning = false;
-	public static boolean isMap = false;
-	public static boolean isHighlight = false;
-	public static boolean isStaircase = false;
 	public static int sleepIndex = 2;
 	public static final int[] SLEEP_TIMES = { 1, 5, 10, 15, 20, 30 };
 
 	@Override
 	public void onInitializeClient() {
-
 		setSetting(Settings.Map, false);
 		setSetting(Settings.Highlight, false);
 		setSetting(Settings.Staircase, false);
@@ -60,7 +56,7 @@ public class CreativeToolsClient implements ClientModInitializer {
 		});
 
 		WorldRenderEvents.END.register(context -> {
-			if (!isHighlight) return;
+			if (!getSetting(Settings.Highlight) || getSetting(Settings.Map)) return;
 
 			Vec3d cameraPos = context.camera().getPos();
 			ClientPlayerEntity player = context.gameRenderer().getClient().player;
@@ -68,7 +64,7 @@ public class CreativeToolsClient implements ClientModInitializer {
 			Vector4f color = new Vector4f(1f,0f,0f, 1);
 
             assert player != null;
-			float offset = isMap ? -2 : 2;
+			float offset = 2;
 			Vector3d boxMin = new Vector3d(player.getX() + offset - 0.5, player.getY() + 0.45, player.getZ() - 0.5);
 			Vector3d boxMax = new Vector3d((player.getX() + 1) + offset - 0.5, (player.getY() + 1) + 0.45, (player.getZ() + 1) - 0.5);
 
@@ -98,11 +94,11 @@ public class CreativeToolsClient implements ClientModInitializer {
 		});
 	}
 
-	public void setSetting(Settings setting, Boolean value) {
+	static public void setSetting(Settings setting, Boolean value) {
 		imageSettings.put(setting, value);
 	}
 
-	public Boolean getSetting(Settings setting) {
+	static public Boolean getSetting(Settings setting) {
 		return imageSettings.get(setting);
 	}
 }
