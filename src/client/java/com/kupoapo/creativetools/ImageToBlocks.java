@@ -101,7 +101,7 @@ public class ImageToBlocks {
     }
     public void buildMap() {
         var mapStartX = roundToMapChunk(this.startPos[0]);
-        var mapStartY = (int)(Math.floor((double) worldTop / 2));
+        var mapStartY = (int)(Math.floor((double) (worldTop + this.startPos[1]) / 2));
         var mapStartZ = roundToMapChunk(this.startPos[2]);
         loopBlocks((x, y, blockID) -> {
             assert client.player != null;

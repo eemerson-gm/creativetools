@@ -54,44 +54,6 @@ public class CreativeToolsClient implements ClientModInitializer {
 				client.setScreen(new ImageScreen());
 			}
 		});
-
-		WorldRenderEvents.END.register(context -> {
-			if (!getSetting(Settings.Highlight) || getSetting(Settings.Map)) return;
-
-			Vec3d cameraPos = context.camera().getPos();
-			ClientPlayerEntity player = context.gameRenderer().getClient().player;
-
-			Vector4f color = new Vector4f(1f,0f,0f, 1);
-
-            assert player != null;
-			float offset = 2;
-			Vector3d boxMin = new Vector3d(player.getX() + offset - 0.5, player.getY() + 0.45, player.getZ() - 0.5);
-			Vector3d boxMax = new Vector3d((player.getX() + 1) + offset - 0.5, (player.getY() + 1) + 0.45, (player.getZ() + 1) - 0.5);
-
-			MatrixStack matrixStack = context.matrixStack();
-			matrixStack.push();
-			matrixStack.translate(-cameraPos.getX(), -cameraPos.getY(), -cameraPos.getZ());
-
-			Tessellator tessellator = RenderSystem.renderThreadTesselator();
-			BufferBuilder bufferBuilder = tessellator.getBuffer();
-
-			RenderSystem.setShader(GameRenderer::getPositionColorProgram);
-			RenderSystem.enableDepthTest();
-
-			bufferBuilder.begin(VertexFormat.DrawMode.DEBUG_LINES, VertexFormats.POSITION_COLOR);
-			boxMin.round();
-			boxMax.round();
-
-			WorldRenderer.drawBox(
-					matrixStack,
-					bufferBuilder,
-					new Box(boxMin.x, boxMin.y, boxMin.z, boxMax.x, boxMax.y, boxMax.z), color.x, color.y, color.z, color.w
-			);
-
-			tessellator.draw();
-			matrixStack.pop();
-			RenderSystem.disableDepthTest();
-		});
 	}
 
 	static public void setSetting(Settings setting, Boolean value) {
