@@ -58,8 +58,7 @@ public class ImageScreen extends Screen {
         }
         addSettingButton(Settings.Map, 0, 0, "Sets building type", "Map", "Portrait");
         addSettingButton(Settings.Staircase, 0, 20, "Sets map to staircase", "Staircase", "Flat");
-        addSettingButton(Settings.Highlight, 0, 40, "Sets start block highlight", "Enabled", "Disabled");
-        addButton(getSleepTimeLabel(), 0, 60, 80, 20, "Time per block placement", b -> {
+        addButton(getSleepTimeLabel(), 0, 40, 80, 20, "Time per block placement", b -> {
             sleepIndex = (sleepIndex + 1) % SLEEP_TIMES.length;
             b.setMessage(Text.literal(getSleepTimeLabel()));
         });
